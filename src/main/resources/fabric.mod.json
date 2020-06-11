@@ -18,7 +18,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.redstoneparadox.wayupthere.WayUpThere"
+      {
+        "adapter": "kotlin",
+        "value": "io.github.redstoneparadox.wayupthere.WayUpThere"
+      }
     ]
   },
   "mixins": [
