@@ -22,10 +22,6 @@ class SkyblockChunkGenerator(biomeSource: BiomeSource): ChunkGenerator(biomeSour
         return VerticalBlockSample(arrayOf())
     }
 
-    override fun method_28506(): Codec<out ChunkGenerator> {
-        return CODEC
-    }
-
     override fun getHeight(x: Int, z: Int, heightmapType: Heightmap.Type?): Int {
         return 0
     }
@@ -45,6 +41,10 @@ class SkyblockChunkGenerator(biomeSource: BiomeSource): ChunkGenerator(biomeSour
         }
     }
 
+    override fun getCodec(): Codec<out ChunkGenerator> {
+        return CODEC
+    }
+
     override fun populateNoise(world: WorldAccess?, accessor: StructureAccessor?, chunk: Chunk?) {
     }
 
@@ -55,7 +55,7 @@ class SkyblockChunkGenerator(biomeSource: BiomeSource): ChunkGenerator(biomeSour
     companion object {
         val CODEC: Codec<out SkyblockChunkGenerator> = RecordCodecBuilder.create { instance ->
             instance.group(
-                BiomeSource.field_24713.fieldOf("biome_source")
+                BiomeSource.CODEC.fieldOf("biome_source")
                     .forGetter { generator: SkyblockChunkGenerator -> generator.biomeSource }
             )
                 .apply(instance, instance.stable(Function {source ->

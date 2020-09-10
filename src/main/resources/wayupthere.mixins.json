@@ -3,7 +3,7 @@
   "package": "io.github.redstoneparadox.wayupthere.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinGeneratorOptions"
+    "GeneratorTypeAccessor"
   ],
   "client": [
   ],
