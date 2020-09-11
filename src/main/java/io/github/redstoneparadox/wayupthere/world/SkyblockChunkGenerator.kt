@@ -3,6 +3,7 @@ package io.github.redstoneparadox.wayupthere.world
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.minecraft.block.Blocks
+import net.minecraft.fluid.Fluids
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.ChunkPos
 import net.minecraft.world.BlockView
@@ -27,16 +28,23 @@ class SkyblockChunkGenerator(biomeSource: BiomeSource): ChunkGenerator(biomeSour
     }
 
     override fun buildSurface(region: ChunkRegion, chunk: Chunk) {
-        if (chunk.pos == ChunkPos(0, 0)) {
-            for (x in 8..11) {
-                for (z in 8..11) {
-                    for (y in 64 downTo 61) {
-                        val pos = BlockPos(x, y, z)
+        val pos = chunk.pos.startPos
+        val rand = region.random
 
-                        if (y == 64) chunk.setBlockState(pos, Blocks.GRASS_BLOCK.defaultState, false)
-                        else chunk.setBlockState(pos, Blocks.DIRT.defaultState, false)
-                    }
-                }
+        for (x in 0..15) {
+            for (z in 0..15) {
+                biomeSource.biomes[0].buildSurface(
+                    rand,
+                    chunk,
+                    x + pos.x,
+                    z + pos.z,
+                    255,
+                    1.0,
+                    Blocks.AIR.defaultState,
+                    Blocks.AIR.defaultState,
+                    0,
+                    0
+                )
             }
         }
     }
