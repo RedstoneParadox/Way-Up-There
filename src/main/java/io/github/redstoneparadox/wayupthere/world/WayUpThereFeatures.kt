@@ -15,7 +15,7 @@ object WayUpThereFeatures {
         StartingIslandFeature(
             StartingIslandFeatureConfig.CODEC
         ),
-        GenerationStep.Feature.RAW_GENERATION
+        GenerationStep.Feature.TOP_LAYER_MODIFICATION
     )
 
     val CONFIGURED_STARTING_ISLAND = register("wayupthere:starting_island", STARTING_ISLAND.configure(StartingIslandFeatureConfig.INSTANCE))

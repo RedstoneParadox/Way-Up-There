@@ -13,16 +13,19 @@ import net.minecraft.structure.pool.StructurePoolElement
 import net.minecraft.structure.pool.StructurePools
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockBox
+import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.ChunkPos
 import net.minecraft.util.registry.DynamicRegistryManager
 import net.minecraft.world.biome.Biome
 import net.minecraft.world.biome.source.BiomeSource
 import net.minecraft.world.gen.ChunkRandom
 import net.minecraft.world.gen.chunk.ChunkGenerator
-import net.minecraft.world.gen.chunk.StructureConfig
 import net.minecraft.world.gen.feature.StructureFeature
 
-class StartingIslandFeature(codec: Codec<StartingIslandFeatureConfig>): StructureFeature<StartingIslandFeatureConfig>(codec) {
+
+class StartingIslandFeature(codec: Codec<StartingIslandFeatureConfig>): StructureFeature<StartingIslandFeatureConfig>(
+    codec
+) {
     override fun getStructureStartFactory(): StructureStartFactory<StartingIslandFeatureConfig> {
         return ::Start as StructureStartFactory<StartingIslandFeatureConfig>
     }
@@ -41,9 +44,35 @@ class StartingIslandFeature(codec: Codec<StartingIslandFeatureConfig>): Structur
         return chunkX == 0 && chunkZ == 0
     }
 
-    class Start(feature: StructureFeature<StartingIslandFeatureConfig>?, chunkX: Int, chunkZ: Int, box: BlockBox, references: Int, seed: Long) : StructureStart<StartingIslandFeatureConfig>(feature, chunkX, chunkZ, box, references, seed) {
-        override fun init(registryManager: DynamicRegistryManager, chunkGenerator: ChunkGenerator, manager: StructureManager, chunkX: Int, chunkZ: Int, biome: Biome, config: StartingIslandFeatureConfig) {
-            StructurePoolBasedGenerator.method_30419(registryManager, config, ::PoolStructurePiece, chunkGenerator, manager, pos, children, random, true, true)
+    class Start(
+        feature: StructureFeature<StartingIslandFeatureConfig>?,
+        chunkX: Int,
+        chunkZ: Int,
+        box: BlockBox,
+        references: Int,
+        seed: Long
+    ) : StructureStart<StartingIslandFeatureConfig>(feature, chunkX, chunkZ, box, references, seed) {
+        override fun init(
+            registryManager: DynamicRegistryManager,
+            chunkGenerator: ChunkGenerator,
+            manager: StructureManager,
+            chunkX: Int,
+            chunkZ: Int,
+            biome: Biome,
+            config: StartingIslandFeatureConfig
+        ) {
+            StructurePoolBasedGenerator.method_30419(
+                registryManager,
+                config,
+                ::PoolStructurePiece,
+                chunkGenerator,
+                manager,
+                BlockPos(chunkX shl 4, 60, chunkZ shl 4),
+                children,
+                random,
+                true,
+                true
+            )
             setBoundingBoxFromChildren()
         }
 
