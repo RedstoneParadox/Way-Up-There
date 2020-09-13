@@ -42,7 +42,11 @@ class SkyblockChunkGenerator(biomeSource: BiomeSource): ChunkGenerator(biomeSour
                     val startingIsland = manager.getStructureOrBlank("wayupthere:starting_island".id())
 
                     world.server.execute {
-                        startingIsland.place(world, BlockPos(trueX, 60, trueZ), StructurePlacementData(), rand)
+                        val size  = startingIsland.size
+                        val spawnX = -(size.x/2)
+                        val spawnZ = -(size.z/2)
+
+                        startingIsland.place(world, BlockPos(spawnX, 60, spawnZ), StructurePlacementData(), rand)
                         world.server.execute {
                             val spawn = world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, BlockPos(0, 60, 0))
                             world.setSpawnPos(spawn, 0.0f)
