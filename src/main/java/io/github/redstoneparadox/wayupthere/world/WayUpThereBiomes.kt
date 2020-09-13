@@ -22,7 +22,6 @@ object WayUpThereBiomes {
 
     private fun createSky(): Biome {
         val builder = GenerationSettings.Builder().surfaceBuilder(ConfiguredSurfaceBuilders.NOPE)
-        builder.structureFeature(WayUpThereFeatures.CONFIGURED_STARTING_ISLAND)
         return Biome.Builder().precipitation(Biome.Precipitation.NONE).category(Biome.Category.NONE).depth(0.1f)
             .scale(0.2f).temperature(0.5f).downfall(0.5f).effects(
                 BiomeEffects.Builder().waterColor(4159204).waterFogColor(329011).fogColor(12638463)
